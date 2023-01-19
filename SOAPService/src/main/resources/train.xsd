@@ -1,0 +1,55 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://trainbooking.fr/train-booking-soap-service" elementFormDefault="qualified">
+
+    <xs:element name="SearchRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="from" type="xs:string"/>
+                <xs:element name="to" type="xs:string"/>
+                <xs:element name="date" type="xs:string"/>
+                <xs:element name="class" type="xs:string"/>
+                <xs:element name="minseats" type="xs:int" default="-1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SearchResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="train" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="id" type="xs:unsignedByte"/>
+                            <xs:element name="idTrain" type="xs:string"/>
+                            <xs:element name="arrival" type="xs:string"/>
+                            <xs:element name="departure" type="xs:string"/>
+                            <xs:element name="departureDatetime" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" name="classes">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="id" type="xs:unsignedByte"/>
+                                        <xs:element name="name" type="xs:string"/>
+                                        <xs:element name="availableSeats" type="xs:unsignedByte"/>
+                                        <xs:element name="trainId" type="xs:unsignedByte"/>
+                                        <xs:element maxOccurs="unbounded" name="tickets">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="id" type="xs:unsignedByte"/>
+                                                    <xs:element name="type" type="xs:string"/>
+                                                    <xs:element name="price" type="xs:unsignedByte"/>
+                                                    <xs:element name="classId" type="xs:unsignedByte"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+</xs:schema>
